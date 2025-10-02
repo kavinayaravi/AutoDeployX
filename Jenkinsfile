@@ -4,22 +4,30 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/kavinayaravi/AutoDeployX.git'
+                git branch: 'main',
+                    url: 'https://github.com/kavinayaravi/AutoDeployX.git'
             }
         }
+
         stage('Build') {
             steps {
-                sh 'npm install'
+                echo "Building the project..."
+                sh 'mvn clean install'
             }
         }
+
         stage('Test') {
             steps {
-                sh 'npm test'
+                echo "Running tests..."
+                sh 'mvn test'
             }
         }
+
         stage('Deploy') {
             steps {
-                sh 'pm2 restart my-app'
+                echo "Deploying application..."
+                // for now just simulate deployment
+                sh 'echo "App deployed successfully!"'
             }
         }
     }
