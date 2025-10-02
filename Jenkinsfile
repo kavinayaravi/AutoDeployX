@@ -7,27 +7,19 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/kavinayaravi/AutoDeployX.git'
             }
         }
-
         stage('Build') {
             steps {
-                echo 'Building the project...'
-                // Example: For Python
-                // sh 'python script.py'
-                // Example: For Node
-                // sh 'npm install && npm test'
+                sh 'npm install'
             }
         }
-
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                // Add test commands here later
+                sh 'npm test'
             }
         }
-
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
+                sh 'pm2 restart my-app'
             }
         }
     }
