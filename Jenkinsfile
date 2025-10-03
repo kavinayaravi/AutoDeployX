@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/kavinayaravi/AutoDeployX.git'
+                git branch: 'main', url: 'https://github.com/kavinayaravi/AutoDeployX.git'
             }
         }
         stage('Install') {
