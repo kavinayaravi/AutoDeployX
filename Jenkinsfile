@@ -1,39 +1,33 @@
 pipeline {
     agent any
-
     stages {
         stage('Clone') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/kavinayaravi/AutoDeployX.git'
+                git 'https://github.com/kavinayaravi/AutoDeployX.git'
             }
         }
-
         stage('Install') {
             steps {
-                echo "Installing Node.js dependencies..."
+                echo 'Installing Node.js dependencies...'
                 bat 'npm install'
             }
         }
-
         stage('Build') {
             steps {
-                echo "Building the project..."
-                bat 'npm run build || echo Build step skipped'
+                echo 'Building project...'
+                bat 'npm run build || echo "No build step"'
             }
         }
-
         stage('Test') {
             steps {
-                echo "Running tests..."
-                bat 'npm test || echo Tests skipped'
+                echo 'Running tests...'
+                bat 'npm test || echo "No tests defined"'
             }
         }
-
         stage('Deploy') {
             steps {
-                echo "Deploying application..."
-                bat 'echo Application deployed successfully!'
+                echo 'Starting server...'
+                bat 'node server.js'
             }
         }
     }
